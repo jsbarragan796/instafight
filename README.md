@@ -1,10 +1,8 @@
 # Instafight
 ## Description
-This is a web application let you make a fight between instagram accounts, who has the most number of recent likes wins, let the fight begin!!.  This was my  midterm exam of my sprint 2018
-[Web development](http://johnguerra.co/classes/webDevelopment_spring_2018/)
-at [Uniandes](https://www.uniandes.edu.co).
+This is a web application let you make a fight between instagram accounts, who has the most number of recent likes wins, let the fight begin!!.  This was my  midterm exam of my sprint 2018 [Web development](http://johnguerra.co/classes/webDevelopment_spring_2018/)
+at [Uniandes](https://www.uniandes.edu.co). What make this webside original is that you can not only fight with two users but with as many as you wish, also view the instagram accounts of the winners.
 
-There is a deployed version available at [here](https://www.uniandes.edu.co)
 
 ## Getting Started
 The following instructions will get you a copy of the project up and running on your local machine for development, testing purposes or grading the exam.
@@ -34,7 +32,7 @@ This project uses ```Environment Variables``` to connect to the db. So at the pr
 ```
 PORT=5000
 ```
-I did upload my credentials to my data base however you can go to the instafight/routes/index.js and comment the admin env and uncomment the read only access. If you use want to use your own base feel free. 
+I did upload my credentials to my data base however you can go to the instafight/routes/index.js and comment the admin env and uncomment the read only access. If you use want to use your own base feel free.
 ### Usage
 At the root directory star the backend by using
 ```
