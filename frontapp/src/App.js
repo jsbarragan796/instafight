@@ -101,7 +101,7 @@ class App extends Component {
 
   render () {
     let fields = null;
-    if (this.state.fighters.length === 0) {
+    if (this.state.fighters.length === 0 && this.state.historic === false) {
     //Fields to users accounts
       fields = (<Form >{this.state.fields.map((p) => {
         return (<FormGroup key ={p.id}>
@@ -111,6 +111,7 @@ class App extends Component {
           <FormFeedback invalid>Sorry, this Instagram account do not exist</FormFeedback>
         </FormGroup>);
       })}
+      <p>You can add more field,  see the historic fights  and when yoy have typed the instagram accounts then load the contestants </p>
       <Button onClick={this.addField}>Add more accounts</Button>
       {(this.state.fields.length > 2) ? <Button onClick={this.deleteField}>delete Field</Button> : null}
       <Button onClick={this.findfighter}>Load the contestants </Button>

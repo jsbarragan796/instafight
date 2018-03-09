@@ -1,6 +1,6 @@
-# NOMBRE
+# Instafight
 ## Description
-This is a web application let you make a fight between instagram accounts, who has the most number of recent likes wins, let the fight begin!!.  This was my hour and half midterm exam of my sprint 2018
+This is a web application let you make a fight between instagram accounts, who has the most number of recent likes wins, let the fight begin!!.  This was my  midterm exam of my sprint 2018
 [Web development](http://johnguerra.co/classes/webDevelopment_spring_2018/)
 at [Uniandes](https://www.uniandes.edu.co).
 
@@ -17,7 +17,7 @@ In order to run this project you need to have installed  ```npm``` and ```mongod
 
 ### Installation
 
-Once you clone or download the project use the Terminal prompt and change the directory to the project folder ```cd ./name ```.
+Once you clone or download the project use the Terminal prompt and change the directory to the project folder ```cd ./instafight ```.
 
 Then install backend node dependencies
 ```
@@ -26,16 +26,15 @@ npm install
 
 Then install react frontend node dependencies
 ```sh
-cd frontend
+cd frontapp
 npm install
 ```
 
 This project uses ```Environment Variables``` to connect to the db. So at the project's root directory create a ```.env``` file following the next structure.
 ```
 PORT=5000
-URL=asdlkfhasdf
 ```
-
+I did upload my credentials to my data base however you can go to the instafight/routes/index.js and comment the admin env and uncomment the read only access. If you use want to use your own base feel free. 
 ### Usage
 At the root directory star the backend by using
 ```
@@ -60,7 +59,7 @@ npm start build
 Then starting the only the server app will be get the app running at http://localhost:5000
 ### Deployed version
 
-There is a deployed version available at [NAME APP](https://www.uniandes.edu.co)
+There is a deployed version available at [Instafight](https://instafighting.herokuapp.com)
 
 ## Author
 [__Juan Sebastián Barrgán Jerónimo__](https://github.com/jsbarragan796)

@@ -4,7 +4,7 @@ import { Button, Row, Col, Card, CardImg, CardBody, CardTitle } from "reactstrap
 import "./App.css";
 
 
-class Results extends Component {
+class Resultsh extends Component {
   render () {
     return (
       <Col className="Spacing">
@@ -14,7 +14,8 @@ class Results extends Component {
             <h1>The winner is: {this.props.winner.username}</h1>
           </Col>
           <Col ms="2">
-            <Button onClick={this.props.restart}>Go back</Button>
+            <Button onClick={this.props.restart}>Go Main</Button>
+            <Button onClick={this.props.next}>Next Hictoric Fight</Button>
           </Col>
         </Row>
         <Row className="Spacing">
@@ -55,4 +56,4 @@ class Results extends Component {
     );
   }
 }
-export default Results;
+export default Resultsh;
