@@ -3,6 +3,7 @@ import banner from "./banner.png";
 import { Button, Label, Input, Form, FormGroup, Row, FormFeedback, Col } from "reactstrap";
 import "./App.css";
 import Fighter from "./fighter";
+import update from "react-addons-update";
 
 class App extends Component {
   constructor (props) {
@@ -10,6 +11,7 @@ class App extends Component {
     this.findfighter = this.findfighter.bind(this);
     this.addField = this.addField.bind(this);
     this.setFighter = this.setFighter.bind(this);
+    this.deleteField = this.deleteField.bind(this);
     this.state = {
       fighters: [],
       fields: [{ id: 0, field: "", invalid: false }, { id: 1, field: "", invalid: false }]
@@ -34,10 +36,20 @@ class App extends Component {
   }
   //add field for more accounts
   addField () {
-    let index = this.state.fields.length + 1;
+    let index = this.state.fields.length;
+    const newArray = update(this.state.fields, { $push: [{ id: Number(index), field: "", invalid: false }] });
     this.setState({
-      fields: this.state.fields.concat([{ id: Number(index), field: "", invalid: false }])
+      fields: newArray
     });
+  }
+  //delete field for more accounts
+  deleteField () {
+    let index = this.state.fields.length - 1;
+    const newArray = this.state.fields.filter((f) => {
+      console.log(index);
+      return f.id !== index;
+    });
+    this.setState({ fields: newArray });
   }
   // error when the account name do not exist
   reportError (id) {
@@ -97,6 +109,7 @@ class App extends Component {
             <Col sm="6">
               <h1>Load the contestants</h1>
               {fields}
+              {(this.state.fields.length > 2) ? <Button onClick={this.deleteField}>delete Field</Button> : null}
               <Button onClick={this.addField}>Add more accounts</Button>
               <Button onClick={this.findfighter}>Load the contestants </Button>
             </Col>
