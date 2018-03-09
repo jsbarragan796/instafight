@@ -4,10 +4,10 @@ const MongoClient = require("mongodb").MongoClient;
 const assert = require("assert");
 
 // Connection mongodb URL write and read rights
-//const url = process.env.MLAB;
+const url = process.env.MLAB;
 
 // Connection mongodb URL read only
-const url = "mongodb://visitor:visitor@ds261838.mlab.com:61838/instafight";
+//const url = "mongodb://visitor:visitor@ds261838.mlab.com:61838/instafight";
 
 
 function savefight (pedido, db, callback) {
@@ -35,7 +35,7 @@ router.post("/addfight", function (req, res) {
 
 
 /* Conexion to the data base collection fights_records. */
-function encontrarSucursales (db, callback) {
+function findFight (db, callback) {
   const collection = db.collection("fights_records");
   collection.find({}).toArray((err, docs) => {
     assert.equal(err, null);
@@ -43,19 +43,19 @@ function encontrarSucursales (db, callback) {
   });
 }
 /* Conexion to the data base instafight. */
-function getSucursales (callback) {
+function getFights (callback) {
   MongoClient.connect(url, (err, client) => {
     assert.equal(err, null);
     console.log("Connected");
     const db = client.db("instafight");
-    encontrarSucursales(db, callback);
+    findFight(db, callback);
     client.close();
   });
 }
 
 /* GET fights records. */
 router.get("/fightsrecords", (req, res) => {
-  getSucursales((sucursales) => res.send(sucursales));
+  getFights((sucursales) => res.send(sucursales));
 });
 
 

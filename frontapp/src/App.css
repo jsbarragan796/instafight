@@ -41,6 +41,10 @@
 .CanPlay{
   background-color:#ffdd99
 }
+
+.Winner{
+  background-color:#85e0e0
+}
 /*Padding for the main content */
 .Container {
     padding:5px 15% 10% 15%;

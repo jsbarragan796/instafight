@@ -5,8 +5,8 @@ import { Button, Label, Input, Form, FormGroup, Row, FormFeedback, Col } from "r
 import "./App.css";
 import Fighters from "./fighters";
 import Fight from "./fight";
-
 import Footer from "./footer";
+import Historic from "./historic";
 
 
 class App extends Component {
@@ -18,10 +18,12 @@ class App extends Component {
     this.deleteField = this.deleteField.bind(this);
     this.restart = this.restart.bind(this);
     this.startFight = this.startFight.bind(this);
+    this.startHistoric = this.startHistoric.bind(this);
     this.state = {
       fighters: [],
       fields: [{ id: 0, field: "", invalid: false }, { id: 1, field: "", invalid: false }],
-      fightStarted: false
+      fightStarted: false,
+      historic: false
     };
   }
   findfighter () {
@@ -49,11 +51,17 @@ class App extends Component {
     this.setState({ fightStarted: true });
   }
 
+  //restart
+  startHistoric () {
+    this.setState({ historic: true });
+  }
+
   //delete field for more accounts
   restart () {
     this.setState({ fields: [{ id: 0, field: "", invalid: false }, { id: 1, field: "", invalid: false }] });
     this.setState({ fighters: [] });
     this.setState({ fightStarted: false });
+    this.setState({ historic: false });
   }
   //add field for more accounts
   addField () {
@@ -106,17 +114,21 @@ class App extends Component {
       <Button onClick={this.addField}>Add more accounts</Button>
       {(this.state.fields.length > 2) ? <Button onClick={this.deleteField}>delete Field</Button> : null}
       <Button onClick={this.findfighter}>Load the contestants </Button>
+      <Button onClick={this.startHistoric}> see historic fights</Button>
       </Form>);
     }
     //Show loaded contestants
     let fighters = null;
-    if (this.state.fighters.length > 0 && this.state.fightStarted === false) {
+    if (this.state.fighters.length > 0 && this.state.fightStarted === false && this.state.historic === false) {
       fighters = (<Fighters fighters= {this.state.fighters}
         startFight= {() => this.startFight()}
         restart = {() => this.restart()}/>);
     }
-    if (this.state.fightStarted) {
+    if (this.state.fightStarted && this.state.historic === false) {
       fighters = (<Fight fighters= {this.state.fighters} restart = {() => this.restart()}/>);
+    }
+    if (this.state.fightStarted === false && this.state.historic) {
+      fighters = (<Historic restart = {() => this.restart()}/>);
     }
 
     return (
