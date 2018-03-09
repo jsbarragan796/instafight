@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import banner from "./banner.png";
+import update from "react-addons-update";
 import { Button, Label, Input, Form, FormGroup, Row, FormFeedback, Col } from "reactstrap";
 import "./App.css";
-import Fighter from "./fighter";
-import update from "react-addons-update";
+import Fighters from "./fighters";
+import Fight from "./fight";
+
+import Footer from "./footer";
+
 
 class App extends Component {
   constructor (props) {
@@ -12,9 +16,12 @@ class App extends Component {
     this.addField = this.addField.bind(this);
     this.setFighter = this.setFighter.bind(this);
     this.deleteField = this.deleteField.bind(this);
+    this.restart = this.restart.bind(this);
+    this.startFight = this.startFight.bind(this);
     this.state = {
       fighters: [],
-      fields: [{ id: 0, field: "", invalid: false }, { id: 1, field: "", invalid: false }]
+      fields: [{ id: 0, field: "", invalid: false }, { id: 1, field: "", invalid: false }],
+      fightStarted: false
     };
   }
   findfighter () {
@@ -27,12 +34,26 @@ class App extends Component {
             throw new Error(res.statusText);
           }
         }).then((fighter) => {
-          let fightersTemp = this.state.fighters;
-          fightersTemp.push(fighter);
-          this.setState({ fighters: fightersTemp });
+        //  let fightersTemp = this.state.fighters;
+          const newArray = update(this.state.fighters, { $push: [fighter] });
+          //  fightersTemp.push(fighter);
+          this.setState({ fighters: newArray });
         })
         .catch((err) => this.reportError(f.id));
     });
+  }
+
+
+  //restart
+  startFight () {
+    this.setState({ fightStarted: true });
+  }
+
+  //delete field for more accounts
+  restart () {
+    this.setState({ fields: [{ id: 0, field: "", invalid: false }, { id: 1, field: "", invalid: false }] });
+    this.setState({ fighters: [] });
+    this.setState({ fightStarted: false });
   }
   //add field for more accounts
   addField () {
@@ -46,11 +67,12 @@ class App extends Component {
   deleteField () {
     let index = this.state.fields.length - 1;
     const newArray = this.state.fields.filter((f) => {
-      console.log(index);
       return f.id !== index;
     });
     this.setState({ fields: newArray });
   }
+
+
   // error when the account name do not exist
   reportError (id) {
     const fieldsTemp = this.state.fields.map((f) => {
@@ -70,21 +92,31 @@ class App extends Component {
   }
 
   render () {
+    let fields = null;
+    if (this.state.fighters.length === 0) {
     //Fields to users accounts
-    let fields = (<Form >{this.state.fields.map((p) => {
-      return (<FormGroup key ={p.id}>
-        <Label className="Font">Fighter {" " + (p.id + 1)}</Label>
-        <Input name={"fighter" + p.id} id={p.id} placeholder="jusebarjer"
-          value={p.field} onChange={this.setFighter} invalid={p.invalid}/>
-        <FormFeedback invalid>Sorry, this Instagram account do not exist</FormFeedback>
-      </FormGroup>);
-    })}</Form>);
+      fields = (<Form >{this.state.fields.map((p) => {
+        return (<FormGroup key ={p.id}>
+          <Label className="Font">Fighter {" " + (p.id + 1)}</Label>
+          <Input name={"fighter" + p.id} id={p.id} placeholder="jusebarjer"
+            value={p.field} onChange={this.setFighter} invalid={p.invalid}/>
+          <FormFeedback invalid>Sorry, this Instagram account do not exist</FormFeedback>
+        </FormGroup>);
+      })}
+      <Button onClick={this.addField}>Add more accounts</Button>
+      {(this.state.fields.length > 2) ? <Button onClick={this.deleteField}>delete Field</Button> : null}
+      <Button onClick={this.findfighter}>Load the contestants </Button>
+      </Form>);
+    }
     //Show loaded contestants
     let fighters = null;
-    if (this.state.fighters.length > 0) {
-      fighters = (<Row className="Spacing"> {this.state.fighters.map((f) => {
-        return (<Fighter key ={f.user.id} fighter = {f}/>);
-      })} </Row>);
+    if (this.state.fighters.length > 0 && this.state.fightStarted === false) {
+      fighters = (<Fighters fighters= {this.state.fighters}
+        startFight= {() => this.startFight()}
+        restart = {() => this.restart()}/>);
+    }
+    if (this.state.fightStarted) {
+      fighters = (<Fight fighters= {this.state.fighters} restart = {() => this.restart()}/>);
     }
 
     return (
@@ -107,17 +139,15 @@ class App extends Component {
           <Row >
             <Col sm="3"/>
             <Col sm="6">
-              <h1>Load the contestants</h1>
               {fields}
-              {(this.state.fields.length > 2) ? <Button onClick={this.deleteField}>delete Field</Button> : null}
-              <Button onClick={this.addField}>Add more accounts</Button>
-              <Button onClick={this.findfighter}>Load the contestants </Button>
+
             </Col>
           </Row>
 
           {fighters}
           <Row />
         </div>
+        <Footer />
       </div>
     );
   }
