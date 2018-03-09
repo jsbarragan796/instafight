@@ -1,7 +1,7 @@
 /* eslint react/prop-types: 0 */
 import React, { Component } from "react";
 import { Card, CardImg, CardBody,
-  CardTitle, CardSubtitle, Col } from "reactstrap";
+  CardTitle, CardSubtitle, Col, Alert } from "reactstrap";
 import "./App.css";
 
 class Fighter extends Component {
@@ -14,13 +14,16 @@ class Fighter extends Component {
 
   render () {
     return (
-      <Col sm="6">
-        <Card>
-          <CardBody>
-            <CardTitle>Full_name {this.props.fighter.user.full_name}</CardTitle>
-            <CardSubtitle>Followers : {this.props.fighter.user.followed_by.count}</CardSubtitle>
+      <Col sm="4">
+        <Card className="SpacingCards">
+          <CardBody className={this.props.fighter.user.is_private ? "CannotPlay" : "CanPlay"}>
+            <Alert color="danger" isOpen={this.props.fighter.user.is_private}>
+              <p>Sorry this account is private, this user cannot fight</p>
+            </Alert>
+            <CardTitle>User name {this.props.fighter.user.full_name}</CardTitle>
+            <CardSubtitle>Number of followers : {this.props.fighter.user.followed_by.count}</CardSubtitle>
           </CardBody>
-          <CardImg width="100px" src={this.props.fighter.user.profile_pic_url_hd}
+          <CardImg width="50px" src={this.props.fighter.user.profile_pic_url_hd}
             alt={"picture profile " + this.props.fighter.user.full_name} />
         </Card>
       </Col>

@@ -1,8 +1,10 @@
 # NOMBRE
 ## Description
-This is a web application let you make fight two instagram accounts, who has the most number of recent likes wins, let the fight begin!!.  This was my hour and half midterm exam of my sprint 2018
+This is a web application let you make a fight between instagram accounts, who has the most number of recent likes wins, let the fight begin!!.  This was my hour and half midterm exam of my sprint 2018
 [Web development](http://johnguerra.co/classes/webDevelopment_spring_2018/)
 at [Uniandes](https://www.uniandes.edu.co).
+
+There is a deployed version available at [here](https://www.uniandes.edu.co)
 
 ## Getting Started
 The following instructions will get you a copy of the project up and running on your local machine for development, testing purposes or grading the exam.
