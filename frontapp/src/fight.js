@@ -52,8 +52,8 @@ class Fight extends Component {
   }
 
   likesCalculator (user) {
-    let likes = user.media.nodes.map((f) => {
-      return f.likes.count;
+    let likes = user.edge_owner_to_timeline_media.edges.map((f) => {
+      return f.node.edge_liked_by.count;
     });
     console.log(likes.reduce((accumulator, currentValue) => accumulator + currentValue));
     return likes.reduce((accumulator, currentValue) => accumulator + currentValue);

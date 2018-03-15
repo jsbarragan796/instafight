@@ -12,8 +12,8 @@ class Fighter extends Component {
           <CardBody className={this.props.fighter.user.is_private ? "CannotPlay" : "CanPlay"}>
             <CardTitle>{"User name " + this.props.fighter.user.full_name}</CardTitle>
             {(this.props.fighter.user.is_private) ? <p>private account</p> : null}
-            <p> {"followers " + this.props.fighter.user.followed_by.count}</p>
-            <p> {"follows " + this.props.fighter.user.follows.count}</p>
+            <p> {"followers " + this.props.fighter.user.edge_followed_by.count}</p>
+            <p> {"follows " + this.props.fighter.user.edge_follow.count}</p>
           </CardBody>
           <CardImg src={this.props.fighter.user.profile_pic_url_hd}
             alt={"picture profile " + this.props.fighter.user.full_name} />

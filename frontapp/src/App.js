@@ -37,7 +37,7 @@ class App extends Component {
           }
         }).then((fighter) => {
         //  let fightersTemp = this.state.fighters;
-          const newArray = update(this.state.fighters, { $push: [fighter] });
+          const newArray = update(this.state.fighters, { $push: [fighter.graphql] });
           //  fightersTemp.push(fighter);
           this.setState({ fighters: newArray });
         })
