@@ -28,10 +28,17 @@ class App extends Component {
   }
   findfighter () {
     this.state.fields.map((f) => {
-      fetch("https://www.instagram.com/" + f.field + "/?__a=1")
+      fetch("https://www.instagram.com/" + f.field + "/?__a=2")
         .then((res) => {
           if (res.status === 200) {
-            return res.json();
+            return res.text().then(function (text) {
+              console.log(text.length);
+              var resp1 = text.split("<script type=\"text/javascript\">window._sharedData =");
+              var resp2 = resp1[1].split(";</script>");
+              var json = JSON.parse(resp2[0]);
+              console.log(json.entry_data.ProfilePage[0]);
+              return json.entry_data.ProfilePage[0];
+            });
           } else {
             throw new Error(res.statusText);
           }
