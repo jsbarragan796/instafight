@@ -32,11 +32,9 @@ class App extends Component {
         .then((res) => {
           if (res.status === 200) {
             return res.text().then(function (text) {
-              console.log(text.length);
               var resp1 = text.split("<script type=\"text/javascript\">window._sharedData =");
               var resp2 = resp1[1].split(";</script>");
               var json = JSON.parse(resp2[0]);
-              console.log(json.entry_data.ProfilePage[0]);
               return json.entry_data.ProfilePage[0];
             });
           } else {
