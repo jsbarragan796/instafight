@@ -1,7 +1,10 @@
 # Instafight
 ## Description
 This is a web application let you make a fight between instagram accounts, who has the most number of recent likes wins, let the fight begin!!.  This was my  midterm exam of my sprint 2018 [Web development](http://johnguerra.co/classes/webDevelopment_spring_2018/)
-at [Uniandes](https://www.uniandes.edu.co). What make this webside original is that you can not only fight with two users but with as many as you wish, also view the instagram accounts of the winners.
+at [Uniandes](https://www.uniandes.edu.co).
+
+## Creative addition
+What make this webside original is that you can not only fight with two users but with as many as you wish, also there is a direct link to view the instagram account of the winner.
 
 
 ## Getting Started
